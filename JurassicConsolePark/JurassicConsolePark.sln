@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34928.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JurassicConsolePark", "JurassicConsolePark.csproj", "{1D0868DF-D3F6-4BD9-9D62-570CBD0F028E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1D0868DF-D3F6-4BD9-9D62-570CBD0F028E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D0868DF-D3F6-4BD9-9D62-570CBD0F028E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D0868DF-D3F6-4BD9-9D62-570CBD0F028E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D0868DF-D3F6-4BD9-9D62-570CBD0F028E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7B02B275-E021-46FF-8F4F-BDC4F726B544}
+	EndGlobalSection
+EndGlobal
