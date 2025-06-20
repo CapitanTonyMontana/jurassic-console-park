@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JurassicConsolePark.Dinosaur;
 enum Herbivorous
 {
     Triceratops,
@@ -10,27 +11,21 @@ enum Herbivorous
     Stegosaurus
 }
 
-namespace Jurassic_Console_Park
+namespace JurassicConsolePark
 {
 
     public class HerbivorousDino : Dinozaur
 
     {
+       
 
         public string UlubionyKolorHex { get; set; }
         public (int R, int G, int B) UlubionyKolorRGB { get; set; }
 
-
-        public override int Eat(int foodStore)
-        {
-            int consumption = Liczba * HowMuchEatPerDay;
-            return foodStore - consumption;
-        }
-
         public virtual void PrzypiszKolorLisci()
         {
 
-            switch (Gatunek)
+            switch (Species)
             {
                 case "Triceratops":
                     UlubionyKolorHex = "#7CFC00";
@@ -57,7 +52,8 @@ namespace Jurassic_Console_Park
             Console.WriteLine("   ////");
             Console.WriteLine("  //////");
             Console.WriteLine(" ////////");
-            Console.WriteLine("  ||||\n");
+           
+            
         }
         public HerbivorousDino()
         {

@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
+using JurassicConsolePark.Dinosaur;
 
-namespace Jurassic_Console_Park
+namespace JurassicConsolePark
 {
     internal class Park
     {
+
+       
         public int FoodStore { get; set; }
         private Random rnd = new Random();
+
+        public List<Dinozaur> dinozaurs = new List<Dinozaur>();
+      
 
         public Park()
         {
@@ -48,13 +47,14 @@ namespace Jurassic_Console_Park
                     }
 
                     Dinozaur nowyDino;
+
                     if (rodzaj == 'R')
                     {
                         var dino = new HerbivorousDino
                         {
-                            Rodzaj = 'R',
-                            Gatunek = wybranyGatunek.ToString(),
-                            Liczba = liczbaDino,
+                            Type = 'R',
+                            Species = wybranyGatunek.ToString(),
+                            Number = liczbaDino,
                         };
 
                         for (int i = 1; i <= liczbaDino; i++)
@@ -75,19 +75,24 @@ namespace Jurassic_Console_Park
                             }
                         }
 
-                        dino.PrzypiszKolorLisci();
-                        dino.PokazKolorLisci();
+                        if (dino is HerbivorousDino herb)
+                        {
+                            herb.PrzypiszKolorLisci();
+                            herb.PokazKolorLisci();
+                        }
+
+
                         dino.WypiszInformacje();
                         dino.GetSound();
                         nowyDino = dino;
                     }
                     else
                     {
-                        var dino = new CarnivorousDino
+                        var dino = new Carnivorous
                         {
-                            Rodzaj = 'M',
-                            Gatunek = wybranyGatunek.ToString(),
-                            Liczba = liczbaDino,
+                            Type = 'M',
+                            Species = wybranyGatunek.ToString(),
+                            Number = liczbaDino,
                         };
 
                         for (int i = 1; i <= liczbaDino; i++)
@@ -130,9 +135,9 @@ namespace Jurassic_Console_Park
             Console.WriteLine("\n Sprawdzam wszystkie dinozaury:");
             foreach (var dino in wszystkieDino)
             {
-                Console.WriteLine($"  Gatunek: {dino.Gatunek}, Rodzaj: {dino.Rodzaj}, Liczba: {dino.Liczba}, Je dziennie: {dino.HowMuchEatPerDay}");
+                Console.WriteLine($"  Gatunek: {dino.Species}, Rodzaj: {dino.Type}, Liczba: {dino.Number}, Je dziennie: {dino.HowMuchEatPerDay}");
 
-                totalDailyConsumption += dino.Liczba * dino.HowMuchEatPerDay;
+                totalDailyConsumption += dino.Number * dino.HowMuchEatPerDay;
             }
 
             Console.WriteLine($"Dziennie jedzą = {totalDailyConsumption}");
@@ -184,23 +189,23 @@ namespace Jurassic_Console_Park
 
             foreach (var dino in wszystkieDino)
             {
-                sumaWszystkich += dino.Liczba;
+                sumaWszystkich += dino.Number;
 
-                if (dino.Rodzaj == 'M')
+                if (dino.Type == 'M')
                 {
-                    sumaMiesozernych += dino.Liczba;
-                    int ileJe = dino.HowMuchEatPerDay * dino.Liczba * 3;
+                    sumaMiesozernych += dino.Number;
+                    int ileJe = dino.HowMuchEatPerDay * dino.Number * 3;
                     jedzenieMiesozerne += ileJe;
 
-                    if (!miesozerneGatunki.ContainsKey(dino.Gatunek))
-                        miesozerneGatunki[dino.Gatunek] = dino.Liczba;
+                    if (!miesozerneGatunki.ContainsKey(dino.Species))
+                        miesozerneGatunki[dino.Species] = dino.Number;
                     else
-                        miesozerneGatunki[dino.Gatunek] += dino.Liczba;
+                        miesozerneGatunki[dino.Species] += dino.Number;
                 }
                 else
                 {
-                    sumaRoslinozernych += dino.Liczba;
-                    int ileJe = dino.HowMuchEatPerDay * dino.Liczba * 2;
+                    sumaRoslinozernych += dino.Number;
+                    int ileJe = dino.HowMuchEatPerDay * dino.Number * 2;
                     jedzenieRoslinozerne += ileJe;
                 }
 
@@ -209,9 +214,9 @@ namespace Jurassic_Console_Park
                     Console.WriteLine($"\nImię: {imie}");
                     Console.WriteLine($"Je dziennie: {dino.HowMuchEatPerDay}");
 
-                    if (dino.Rodzaj == 'M')
+                    if (dino.Type == 'M')
                     {
-                        Console.WriteLine($"Gatunek (mięsożerny): {dino.Gatunek}");
+                        Console.WriteLine($"Gatunek (mięsożerny): {dino.Species}");
                     }
                     else
                     {
@@ -250,7 +255,7 @@ namespace Jurassic_Console_Park
             Console.WriteLine($"Początkowa ilość jedzenia: {this.FoodStore}");
             Console.WriteLine($"Po ilu dniach zabraknie: {daysUntilFoodRunsOut}");
 
-            Console.WriteLine("\nJurassic Console Park 2 zakończył raport.\n");
+            Console.WriteLine("\nJurassic Console Park  zakończył raport.\n");
         }
 
 
@@ -262,11 +267,11 @@ namespace Jurassic_Console_Park
 
             foreach (var dino in wszystkieDino)
             {
-                Console.WriteLine($"\n{dino.Gatunek}:");
+                Console.WriteLine($"\n{dino.Species}:");
 
                 foreach (var imie in dino.Imiona)
                 {
-                    string odglos = dino.Rodzaj == 'M' ? $"{imie}: Raaaawr!" : $"{imie}: Mniam liść!";
+                    string odglos = dino.Type == 'M' ? $"{imie}: Raaaawr!" : $"{imie}: Mniam liść!";
                     Console.WriteLine(" - " + odglos);
                 }
             }

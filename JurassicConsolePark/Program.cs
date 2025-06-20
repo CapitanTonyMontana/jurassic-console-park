@@ -1,4 +1,5 @@
-﻿using Jurassic_Console_Park;
+﻿using JurassicConsolePark;
+using JurassicConsolePark.Dinosaur;
 using System;
 using System.Text.RegularExpressions;
 
@@ -37,12 +38,12 @@ class Program
             Console.WriteLine("\nCzy chcesz dodać również dinozaury mięsożerne? (T/N)");
             if (Console.ReadLine().Trim().ToUpper() == "T")
             {
-                park.DodajDinozaury<Carnivorous>('M', wszystkieDino);
+                park.DodajDinozaury<CarnivorousBreed>('M', wszystkieDino);
             }
         }
         else
         {
-            park.DodajDinozaury<Carnivorous>('M', wszystkieDino);
+            park.DodajDinozaury<CarnivorousBreed>('M', wszystkieDino);
             Console.WriteLine("\nCzy chcesz dodać również dinozaury roślinożerne? (T/N)");
             if (Console.ReadLine().Trim().ToUpper() == "T")
             {
@@ -81,13 +82,6 @@ class Program
             }
         }
     }
-
-
-
-
-
-
-
 }
 
 
