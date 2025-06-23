@@ -11,16 +11,12 @@ class Program
     {
         List<Dinozaur> wszystkieDino = new List<Dinozaur>();
         Park park = new Park();
-
         Console.WriteLine("WITAJ W PARKU JURAJSKIM!\n");
-
         char wyborRodzaju = ' ';
-
         while (true)
         {
             Console.WriteLine("Wybierz rodzaj dinozaurów wpisując 'M' (Mięsożerne) lub 'R' (Roślinożerne):");
             string inputRodzaju = Console.ReadLine().Trim().ToUpper();
-
             if (inputRodzaju == "M" || inputRodzaju == "R")
             {
                 wyborRodzaju = inputRodzaju[0];
@@ -34,23 +30,22 @@ class Program
 
         if (wyborRodzaju == 'R')
         {
-            park.DodajDinozaury<Herbivorous>('R', wszystkieDino);
+            HerbivorousDino.DodajRoslinozerne<Herbivorous>('R', wszystkieDino);
             Console.WriteLine("\nCzy chcesz dodać również dinozaury mięsożerne? (T/N)");
             if (Console.ReadLine().Trim().ToUpper() == "T")
             {
-                park.DodajDinozaury<CarnivorousBreed>('M', wszystkieDino);
+                CarnivorousDino.DodajMiesozerne('M', wszystkieDino);
             }
         }
         else
         {
-            park.DodajDinozaury<CarnivorousBreed>('M', wszystkieDino);
+            CarnivorousDino.DodajMiesozerne('M', wszystkieDino);
             Console.WriteLine("\nCzy chcesz dodać również dinozaury roślinożerne? (T/N)");
             if (Console.ReadLine().Trim().ToUpper() == "T")
             {
-                park.DodajDinozaury<Herbivorous>('R', wszystkieDino);
+                HerbivorousDino.DodajRoslinozerne<Herbivorous>('R', wszystkieDino);
             }
         }
-
         while (true)
         {
             Console.WriteLine("\n--- MENU ---");
@@ -60,7 +55,6 @@ class Program
             Console.Write("Wybierz opcję (A/B/C): ");
 
             string wybor = Console.ReadLine().Trim().ToUpper();
-
             switch (wybor)
             {
                 case "A":
