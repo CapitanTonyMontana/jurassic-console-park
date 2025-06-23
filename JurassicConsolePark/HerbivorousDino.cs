@@ -11,9 +11,7 @@ namespace JurassicConsolePark
 {
 
     public class HerbivorousDino : Dinozaur
-
     {
-       
         public string UlubionyKolorHex { get; set; }
         public (int R, int G, int B) UlubionyKolorRGB { get; set; }
         public HerbivorousDino()
@@ -21,13 +19,10 @@ namespace JurassicConsolePark
             Type = 'R';
             Random rnd = new Random();
             HowMuchEatPerDay = rnd.Next(2, 9);
-            
         }
 
-
        protected void PrzypiszKolorLisci()
-        {
-
+        { 
             switch (Species)
             {
                 case "Triceratops":
