@@ -7,10 +7,8 @@ namespace JurassicConsolePark.Dinosaur
         public CarnivorousDino()
         {
             Type = 'M';
-           
             Random rand = new Random();
             HowMuchEatPerDay = rand.Next(8, 16);
-
         }
         protected override int CountDailyComsumption()
         {

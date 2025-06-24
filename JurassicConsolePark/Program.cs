@@ -1,10 +1,5 @@
 ﻿using JurassicConsolePark;
 using JurassicConsolePark.Dinosaur;
-using System;
-using System.Text.RegularExpressions;
-
-
-
 class Program
 {
     static void Main()
@@ -27,7 +22,6 @@ class Program
                 Console.WriteLine("Niepoprawny wybór. Wpisz tylko 'M' lub 'R'.\n");
             }
         }
-
         if (wyborRodzaju == 'R')
         {
             HerbivorousDino.DodajRoslinozerne<Herbivorous>('R', wszystkieDino);
@@ -53,7 +47,6 @@ class Program
             Console.WriteLine("B: Zagraj w zgadywanie (TryToGuess)");
             Console.WriteLine("C: Zakończ program");
             Console.Write("Wybierz opcję (A/B/C): ");
-
             string wybor = Console.ReadLine().Trim().ToUpper();
             switch (wybor)
             {

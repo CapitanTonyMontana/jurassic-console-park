@@ -6,6 +6,7 @@ namespace JurassicConsolePark
 {
     internal class Park
     {
+       
         public int FoodStore { get; set; }
         private Random rnd = new Random();
         public List<Dinozaur> dinozaurs = new List<Dinozaur>();
@@ -49,7 +50,6 @@ namespace JurassicConsolePark
             private void WypiszPodsumowanie(List<Dinozaur> wszystkieDino, int daysUntilFoodRunsOut) 
         {
                 Console.WriteLine("\n--- PODSUMOWANIE DINOZAURÓW ---");
-
                 int sumaWszystkich = 0;
                 int sumaMiesozernych = 0;
                 int sumaRoslinozernych = 0;

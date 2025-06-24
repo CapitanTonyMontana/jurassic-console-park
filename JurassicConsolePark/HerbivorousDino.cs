@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 using JurassicConsolePark.Dinosaur;
-
 
 namespace JurassicConsolePark
 {
@@ -16,7 +10,6 @@ namespace JurassicConsolePark
         public string UlubionyKolorHex { get; set; }
         public (int R, int G, int B) UlubionyKolorRGB { get; set; }
 
-
         public HerbivorousDino (Herbivorous speciesEnum)
         {
             SpeciesEnum = speciesEnum;
@@ -26,7 +19,6 @@ namespace JurassicConsolePark
             HowMuchEatPerDay = rnd.Next(2, 9);
             PrzypiszKolorLisci(speciesEnum);
         }
-
        private void PrzypiszKolorLisci(Herbivorous speciesEnum)
         { 
             switch (SpeciesEnum)
@@ -47,7 +39,6 @@ namespace JurassicConsolePark
                     throw new ArgumentOutOfRangeException($"Nieobsługiwany gatunek: {SpeciesEnum}");
             }
         }
-
         public  void PokazKolorLisci()
         {
                 Console.WriteLine($"Ulubiony kolor liści (hex): {UlubionyKolorHex}, RGB: ({UlubionyKolorRGB.R}, {UlubionyKolorRGB.G}, {UlubionyKolorRGB.B})");
@@ -56,12 +47,10 @@ namespace JurassicConsolePark
                 Console.WriteLine(" ////////");
                 Console.WriteLine("  ||||\n");
         }
-       
         protected override int CountDailyComsumption()
         {
             return base.CountDailyComsumption() * 2;
         }
-
         public static void DodajRoslinozerne<T>(char rodzaj, List<Dinozaur> wszystkieDino)
         where T :  Enum
         {
@@ -97,7 +86,6 @@ namespace JurassicConsolePark
                             if (Regex.IsMatch(imie, @"^[a-zA-Z]+$"))
                                 dino.Imiona.Add(imie);
                         }
-
                         wszystkieDino.Add(dino);
                     }
                     break;
