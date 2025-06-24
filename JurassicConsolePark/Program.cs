@@ -4,17 +4,17 @@ class Program
 {
     static void Main()
     {
-        List<Dinozaur> wszystkieDino = new List<Dinozaur>();
+        List<Dinozaur> allDino = new List<Dinozaur>();
         Park park = new Park();
         Console.WriteLine("WITAJ W PARKU JURAJSKIM!\n");
-        char wyborRodzaju = ' ';
+        char selectType = ' ';
         while (true)
         {
             Console.WriteLine("Wybierz rodzaj dinozaurów wpisując 'M' (Mięsożerne) lub 'R' (Roślinożerne):");
-            string inputRodzaju = Console.ReadLine().Trim().ToUpper();
-            if (inputRodzaju == "M" || inputRodzaju == "R")
+            string inputType = Console.ReadLine().Trim().ToUpper();
+            if (inputType == "M" || inputType == "R")
             {
-                wyborRodzaju = inputRodzaju[0];
+                selectType = inputType[0];
                 break;
             }
             else
@@ -22,22 +22,22 @@ class Program
                 Console.WriteLine("Niepoprawny wybór. Wpisz tylko 'M' lub 'R'.\n");
             }
         }
-        if (wyborRodzaju == 'R')
+        if (selectType == 'R')
         {
-            HerbivorousDino.DodajRoslinozerne<Herbivorous>('R', wszystkieDino);
+            Park.AddHerbivorous<Herbivorous>('R', allDino);
             Console.WriteLine("\nCzy chcesz dodać również dinozaury mięsożerne? (T/N)");
             if (Console.ReadLine().Trim().ToUpper() == "T")
             {
-                CarnivorousDino.DodajMiesozerne('M', wszystkieDino);
+                Park.AddCarnivorous('M', allDino);
             }
         }
         else
         {
-            CarnivorousDino.DodajMiesozerne('M', wszystkieDino);
+            Park.AddCarnivorous('M', allDino);
             Console.WriteLine("\nCzy chcesz dodać również dinozaury roślinożerne? (T/N)");
             if (Console.ReadLine().Trim().ToUpper() == "T")
             {
-                HerbivorousDino.DodajRoslinozerne<Herbivorous>('R', wszystkieDino);
+                Park.AddHerbivorous<Herbivorous>('R', allDino);
             }
         }
         while (true)
@@ -52,11 +52,11 @@ class Program
             {
                 case "A":
                     Console.WriteLine("\nWszystkie odgłosy dinozaurów:");
-                    park.GetAllSounds(wszystkieDino);
+                    park.GetAllSounds(allDino);
                     break;
 
                 case "B":
-                    park.TryToGuess(wszystkieDino);
+                    park.TryToGuess(allDino);
                     break;
 
                 case "C":
