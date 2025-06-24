@@ -1,6 +1,6 @@
 ﻿namespace JurassicConsolePark.Dinosaur
 {
-    enum Herbivorous
+    public enum Herbivorous
     {
         Triceratops,
         Brachiosaurus,
