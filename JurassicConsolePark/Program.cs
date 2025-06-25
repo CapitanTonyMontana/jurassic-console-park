@@ -6,11 +6,11 @@ class Program
     {
         List<Dinozaur> allDino = new List<Dinozaur>();
         Park park = new Park();
-        Console.WriteLine("WITAJ W PARKU JURAJSKIM!\n");
+        Printer.PrintWelcome();
         char selectType = ' ';
         while (true)
         {
-            Console.WriteLine("Wybierz rodzaj dinozaurów wpisując 'M' (Mięsożerne) lub 'R' (Roślinożerne):");
+            Printer.ChooseType();
             string inputType = Console.ReadLine().Trim().ToUpper();
             if (inputType == "M" || inputType == "R")
             {
@@ -19,13 +19,13 @@ class Program
             }
             else
             {
-                Console.WriteLine("Niepoprawny wybór. Wpisz tylko 'M' lub 'R'.\n");
+                Printer.Incorrectchoice();
             }
         }
         if (selectType == 'R')
         {
             Park.AddHerbivorous<Herbivorous>('R', allDino);
-            Console.WriteLine("\nCzy chcesz dodać również dinozaury mięsożerne? (T/N)");
+            Printer.Addcarni();
             if (Console.ReadLine().Trim().ToUpper() == "T")
             {
                 Park.AddCarnivorous('M', allDino);
@@ -34,7 +34,7 @@ class Program
         else
         {
             Park.AddCarnivorous('M', allDino);
-            Console.WriteLine("\nCzy chcesz dodać również dinozaury roślinożerne? (T/N)");
+            Printer.Addherbi();
             if (Console.ReadLine().Trim().ToUpper() == "T")
             {
                 Park.AddHerbivorous<Herbivorous>('R', allDino);
@@ -42,16 +42,16 @@ class Program
         }
         while (true)
         {
-            Console.WriteLine("\n--- MENU ---");
-            Console.WriteLine("A: Usłysz dźwięki dinozaurów");
-            Console.WriteLine("B: Zagraj w zgadywanie (TryToGuess)");
-            Console.WriteLine("C: Zakończ program");
-            Console.Write("Wybierz opcję (A/B/C): ");
-            string wybor = Console.ReadLine().Trim().ToUpper();
-            switch (wybor)
+            Printer.Menu();
+            Printer.A();
+            Printer.B();
+            Printer.C();
+            Printer.ABC();
+            string choice = Console.ReadLine().Trim().ToUpper();
+            switch (choice)
             {
                 case "A":
-                    Console.WriteLine("\nWszystkie odgłosy dinozaurów:");
+                    Printer.Allsounds();
                     park.GetAllSounds(allDino);
                     break;
 
@@ -60,11 +60,11 @@ class Program
                     break;
 
                 case "C":
-                    Console.WriteLine("Do zobaczenia w Parku Jurajskim!");
+                    Printer.Seeyou();
                     return;
 
                 default:
-                    Console.WriteLine("Niepoprawna opcja. Wybierz A, B lub C.");
+                    Printer.Incorrectoption();
                     break;
             }
         }

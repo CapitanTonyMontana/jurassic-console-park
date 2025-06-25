@@ -16,39 +16,39 @@ namespace JurassicConsolePark
         }
         public void TryToGuess(List<Dinozaur> allDino)
         {
-            Console.WriteLine("\n--- Sprawdzam wszystkie dinozaury ---");
+            Printer.Checkig();
             int totalDailyConsumption = allDino.Sum(d => d.Number * d.HowMuchEatPerDay);
-            Console.WriteLine($"Dziennie jedzą = {totalDailyConsumption}");
+            Printer.Dailyeats(totalDailyConsumption);
             if (totalDailyConsumption == 0)
             {
-                Console.WriteLine("Żaden dinozaur nie je – nie można obliczyć liczby dni.");
+                Printer.Nooneofthemeat();
                 return;
             }
             int daysUntilFoodRunsOut = this.FoodStore / totalDailyConsumption;
-            Console.WriteLine("\nZgadnij, po ilu dniach skończy się jedzenie!");
+            Printer.Guess();
             int guess;
             do
             {
-                Console.Write("Twoja odpowiedź: ");
+                Printer.Youranswer();
                 string input = Console.ReadLine();
                 if (!int.TryParse(input, out guess))
                 {
-                    Console.WriteLine("To nie jest liczba! Spróbuj jeszcze raz.");
+                    Printer.Notnumber();
                     continue;
                 }
                 if (guess < daysUntilFoodRunsOut)
-                    Console.WriteLine("Za mało!");
+                    Printer.Tolow();
                 else if (guess > daysUntilFoodRunsOut)
-                    Console.WriteLine("Za dużo!");
+                    Printer.Tomuch();
             }
             while (guess != daysUntilFoodRunsOut);
-            Console.WriteLine("Brawo! Zgadłeś!");
+            Printer.Bravo();
 
             PrintSummary(allDino, daysUntilFoodRunsOut);
         }
         private void PrintSummary(List<Dinozaur> allDino, int daysUntilFoodRunsOut)
         {
-            Console.WriteLine("\n--- PODSUMOWANIE DINOZAURÓW ---");
+            Printer.Summary();
             int totalCount = 0;
             int carnivoreCount = 0;
             int herbivoreCount = 0;
@@ -79,104 +79,118 @@ namespace JurassicConsolePark
             }
 
             int totalFood = carnivoreFood + herbivoreFood;
-            Console.WriteLine($"\n--- SUMY ---");
-            Console.WriteLine($"Suma wszystkich dinozaurów: {totalCount}");
-            Console.WriteLine($"Mięsożernych: {carnivoreCount}");
-            Console.WriteLine($"Roślinożernych: {herbivoreCount}");
-            Console.WriteLine($"\nJedzenie dziennie:");
-            Console.WriteLine($"Mięsożerne: {carnivoreFood}");
-            Console.WriteLine($"Roślinożerne: {herbivoreFood}");
-            Console.WriteLine($"Łącznie: {totalFood}");
-            Console.WriteLine($"\n--- Gatunki mięsożerne ---");
-            Console.WriteLine($"Liczba różnych gatunków: {carnivoreSpecies.Count}");
+            Printer.SUMS();
+            Printer.AllDinoSums(totalCount);
+            Printer.CarniSums(carnivoreCount);
+            Printer.HerbiSums(herbivoreCount);
+            Printer.DailyEats2();
+            Printer.DailyCarniEats(carnivoreFood);
+            Printer.DailyHerbiEats(herbivoreFood);
+            Printer.Together(totalFood);
             foreach (var pair in carnivoreSpecies)
             {
-                Console.WriteLine($"{pair.Key} – {pair.Value} sztuk");
+                Printer.Count(pair);
             }
-            Console.WriteLine($"\n--- Zasoby ---");
-            Console.WriteLine($"Początkowa ilość jedzenia: {this.FoodStore}");
-            Console.WriteLine($"Po ilu dniach zabraknie: {daysUntilFoodRunsOut}");
-            Console.WriteLine("\nJurassic Console Park zakończył raport.\n");
+            Printer.Resources();
+            Printer.InitialNumber(FoodStore);
+            Printer.DaysUntilFood(daysUntilFoodRunsOut);
+            Printer.End();
         }
-
         public void GetAllSounds(List<Dinozaur> allDino)
             {
                 foreach (var dino in allDino)
-                {
-                    Console.WriteLine($"\n{dino.Species}");
-
-                    foreach (var name in dino.Names)
-                    {
-                        string sound = dino.Type == 'M' ? $"{name}: Raaaawr!" : $"{name}: Mniam liść!";
-                        Console.WriteLine(" - " + sound);
-                    }
-                }
+              {
+                Printer.Species(dino.Species);
+                foreach (var name in dino.Names)
+                 {
+                    Printer.Sound(name, dino.Type);
+                 }
+              }
             }
         public static void AddHerbivorous<T>(char type, List<Dinozaur> allDino)
-    where T : Enum
+       where T : Enum
         {
-            Console.WriteLine($"\nDostępne gatunki roślinożerne:");
+            Printer.AvailableHerbi();
             foreach (var name in Enum.GetNames(typeof(T)))
             {
                 Console.WriteLine("- " + name);
             }
             while (true)
             {
-                Console.WriteLine("\nWpisz nazwę gatunku:");
+                Printer.SpeciesType();
                 string speciesInput = Console.ReadLine();
-
                 if (Enum.TryParse(typeof(T), speciesInput, true, out object parsedEnum) &&
                     Enum.IsDefined(typeof(T), parsedEnum))
                 {
                     T chosenSpecies = (T)parsedEnum;
-                    Console.WriteLine("Wybrano gatunek: " + chosenSpecies);
-                    Console.WriteLine("\nIle dinozaurów tego gatunku chcesz dodać?");
-
-                    if (int.TryParse(Console.ReadLine(), out int numberDino) && numberDino > 0)
+                    Printer.ChosenSpecies(chosenSpecies);
+                    int numberDino;
+                    while (true)
                     {
-                        var dino = new HerbivorousDino((Herbivorous)(object)chosenSpecies)
+                        Printer.HowMany();
+                        string input = Console.ReadLine();
+                        if (int.TryParse(input, out numberDino) && numberDino > 0)
                         {
-                            Type = 'R',
-                            Number = numberDino
-                        };
-
-                        for (int i = 1; i <= numberDino; i++)
-                        {
-                            Console.Write($"Podaj imię dla dinozaura #{i}: ");
-                            string name = Console.ReadLine();
-                            if (Regex.IsMatch(name, @"^[a-zA-Z]+$"))
-                                dino.Names.Add(name);
+                            break; 
                         }
-                        allDino.Add(dino);
+                        else
+                        {
+                            Printer.IncorrectNumber();
+                        }
                     }
+                    var dino = new HerbivorousDino((Herbivorous)(object)chosenSpecies)
+                    {
+                        Type = 'R',
+                        Number = numberDino
+                    };
+                    for (int i = 1; i <= numberDino; i++)
+                    {
+                        Printer.GiveName(i);
+                        string name = Console.ReadLine();
+                        if (Regex.IsMatch(name, @"^[a-zA-Z]+$"))
+                            dino.Names.Add(name);
+                    }
+                    allDino.Add(dino);
                     break;
                 }
-                else Console.WriteLine("Niepoprawna nazwa gatunku.");
+                else
+                {
+                    Printer.InccorrectSpecies();
+                }
             }
         }
         public static void AddCarnivorous(char type, List<Dinozaur> allDino)
         {
-            Console.WriteLine("Ile dinozaurów tego gatunku chcesz dodać?");
-            if (int.TryParse(Console.ReadLine(), out int numberDino) && numberDino > 0)
+            int numberDino;
+            while (true)
             {
-                var dino = new CarnivorousDino
+                Printer.HowManyCarni();
+                string input = Console.ReadLine();
+                if (int.TryParse(input, out numberDino) && numberDino > 0)
                 {
-                    Type = 'M',
-                    Number = numberDino
-                };
-
-                for (int i = 1; i <= numberDino; i++)
-                {
-                    Console.Write($"Podaj imię dla dinozaura #{i}: ");
-                    string name = Console.ReadLine();
-                    if (Regex.IsMatch(name, @"^[a-zA-Z]+$"))
-                        dino.Names.Add(name);
+                    break; 
                 }
-                allDino.Add(dino);
+                else
+                {
+                    Printer.IncorrectNumber();
+                }
             }
+            var dino = new CarnivorousDino
+            {
+                Type = 'M',
+                Number = numberDino
+            };
+            for (int i = 1; i <= numberDino; i++)
+            {
+                Printer.GiveName(i);
+                string name = Console.ReadLine();
+                if (Regex.IsMatch(name, @"^[a-zA-Z]+$"))
+                    dino.Names.Add(name);
+            }
+            allDino.Add(dino);
         }
     }
-    }
+}
 
 
 
