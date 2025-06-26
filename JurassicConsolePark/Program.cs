@@ -19,13 +19,13 @@ class Program
             }
             else
             {
-                Printer.Incorrectchoice();
+                Printer.IncorrectChoice();
             }
         }
         if (selectType == 'R')
         {
             Park.AddHerbivorous<Herbivorous>('R', allDino);
-            Printer.Addcarni();
+            Printer.AddCarni();
             if (Console.ReadLine().Trim().ToUpper() == "T")
             {
                 Park.AddCarnivorous('M', allDino);
@@ -34,7 +34,7 @@ class Program
         else
         {
             Park.AddCarnivorous('M', allDino);
-            Printer.Addherbi();
+            Printer.AddHerbi();
             if (Console.ReadLine().Trim().ToUpper() == "T")
             {
                 Park.AddHerbivorous<Herbivorous>('R', allDino);
@@ -51,7 +51,7 @@ class Program
             switch (choice)
             {
                 case "A":
-                    Printer.Allsounds();
+                    Printer.AllSounds();
                     park.GetAllSounds(allDino);
                     break;
 
@@ -60,11 +60,11 @@ class Program
                     break;
 
                 case "C":
-                    Printer.Seeyou();
+                    Printer.SeeYou();
                     return;
 
                 default:
-                    Printer.Incorrectoption();
+                    Printer.IncorrectOption();
                     break;
             }
         }

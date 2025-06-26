@@ -12,15 +12,15 @@ namespace JurassicConsolePark
         {
             Console.WriteLine("Wybierz rodzaj dinozaurów wpisując 'M' (Mięsożerne) lub 'R' (Roślinożerne:");
         }
-        public static void Incorrectchoice()
+        public static void IncorrectChoice()
         {
             Console.WriteLine("Niepoprawny wybór. Wpisz tylko 'M' lub 'R'.\n");
         }
-        public static void Addcarni()
+        public static void AddCarni()
         {
             Console.WriteLine("\nCzy chcesz dodać również dinozaury mięsożerne? (T/N)");
         }
-        public static void Addherbi()
+        public static void AddHerbi()
         {
             Console.WriteLine("\nCzy chcesz dodać również dinozaury roślinożerne? (T/N)");
         }
@@ -44,15 +44,15 @@ namespace JurassicConsolePark
         {
             Console.Write("Wybierz opcję (A/B/C): ");
         }
-        public static void Allsounds()
+        public static void AllSounds()
         {
             Console.WriteLine("\nWszystkie odgłosy dinozaurów:");
         }
-        public static void Seeyou()
+        public static void SeeYou()
         {
             Console.WriteLine("Do zobaczenia w Parku Jurajskim!");
         }
-        public static void Incorrectoption()
+        public static void IncorrectOption()
         {
             Console.WriteLine("Niepoprawna opcja. Wybierz A, B lub C.");
         }
@@ -60,11 +60,11 @@ namespace JurassicConsolePark
         {
             Console.WriteLine("\n--- Sprawdzam wszystkie dinozaury ---");
         }
-        public static void Dailyeats(int totalDailyConsumption)
+        public static void DailyEats(int totalDailyConsumption)
         {
             Console.WriteLine($"Dziennie jedzą = {totalDailyConsumption}");
         }
-        public static void Nooneofthemeat()
+        public static void NoOneOfThemEat()
         {
             Console.WriteLine("Żaden dinozaur nie je – nie można obliczyć liczby dni.");
         }
@@ -72,19 +72,19 @@ namespace JurassicConsolePark
         {
             Console.WriteLine("\nZgadnij, po ilu dniach skończy się jedzenie!");
         }
-        public static void Youranswer()
+        public static void YourAnswer()
         {
             Console.Write("Twoja odpowiedź: ");
         }
-        public static void Notnumber()
+        public static void NotNumber()
         {
             Console.WriteLine("To nie jest liczba! Spróbuj jeszcze raz.");
         }
-        public static void Tomuch()
+        public static void ToMuch()
         {
             Console.WriteLine("Za dużo!");
         }
-        public static void Tolow()
+        public static void ToLow()
         {
             Console.WriteLine("Za mało!");
         }

@@ -18,10 +18,10 @@ namespace JurassicConsolePark
         {
             Printer.Checkig();
             int totalDailyConsumption = allDino.Sum(d => d.Number * d.HowMuchEatPerDay);
-            Printer.Dailyeats(totalDailyConsumption);
+            Printer.DailyEats(totalDailyConsumption);
             if (totalDailyConsumption == 0)
             {
-                Printer.Nooneofthemeat();
+                Printer.NoOneOfThemEat();
                 return;
             }
             int daysUntilFoodRunsOut = this.FoodStore / totalDailyConsumption;
@@ -29,17 +29,17 @@ namespace JurassicConsolePark
             int guess;
             do
             {
-                Printer.Youranswer();
+                Printer.YourAnswer();
                 string input = Console.ReadLine();
                 if (!int.TryParse(input, out guess))
                 {
-                    Printer.Notnumber();
+                    Printer.NotNumber();
                     continue;
                 }
                 if (guess < daysUntilFoodRunsOut)
-                    Printer.Tolow();
+                    Printer.ToLow();
                 else if (guess > daysUntilFoodRunsOut)
-                    Printer.Tomuch();
+                    Printer.ToMuch();
             }
             while (guess != daysUntilFoodRunsOut);
             Printer.Bravo();
